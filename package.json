@@ -1,0 +1,32 @@
+{
+  "name": "openmusic-api",
+  "version": "1.0.0",
+  "description": "Project pertama Dicoding OpenMusic API V1",
+  "main": "index.js",
+  "scripts": {
+    "start:prod": "NODE_ENV=production nodemon src/server.js",
+    "start:dev": "nodemon src/server.js",
+    "lint": "eslint ./src",
+    "migrate": "node-pg-migrate"
+  },
+  "keywords": [
+    "hapi",
+    "Dicoding"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "dotenv": "^16.0.3",
+    "joi": "^17.6.4",
+    "nanoid": "^4.0.0",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
+  }
+}
