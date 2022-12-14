@@ -2,6 +2,7 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
+const { SongModel } = require('../../utils/model');
 
 class SongsService {
   constructor() {
@@ -16,7 +17,7 @@ class SongsService {
     const updateAt = createAt;
 
     const query = {
-      text: 'INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+      text: 'INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id',
       values: [id, title, year, performer, genre, duration, albumId, createAt, updateAt],
     };
 
@@ -41,8 +42,8 @@ class SongsService {
     }
 
     const query = {
-      text: 'SELECT id, title, year, performer FROM songs WHERE title LIKE $1 AND performer LIKE $2',
-      values: [`%${title}%`, `%${performer}%`],
+      text: 'SELECT id, title, performer FROM songs WHERE lower(title) LIKE $1 AND lower(performer) LIKE $2',
+      values: [`%${title.toLowerCase()}%`, `%${performer.toLowerCase()}%`],
     };
 
     const result = await this._pool.query(query);
@@ -62,14 +63,14 @@ class SongsService {
       throw new NotFoundError('Song Id tidak ditemukan');
     }
 
-    return result.rows;
+    return SongModel(result.rows[0]);
   }
 
   async editSongById(id, {
     title, year, genre, performer, duration, albumId,
   }) {
     const query = {
-      text: 'UPDATE songs SET title = $1, year = $2, genre = $3, performer = $4, duration = $5, albumId = $6 WHERE id = $7 RETURNING id',
+      text: 'UPDATE songs SET title = $1, year = $2, genre = $3, performer = $4, duration = $5, album_id = $6 WHERE id = $7 RETURNING id',
       values: [title, year, genre, performer, duration, albumId, id],
     };
 
@@ -82,7 +83,7 @@ class SongsService {
 
   async deleteSongById(id) {
     const query = {
-      text: 'DELETE songs WHERE id = $1 RETURNING id',
+      text: 'DELETE FROM songs WHERE id = $1 RETURNING id',
       values: [id],
     };
 

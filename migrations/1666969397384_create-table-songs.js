@@ -26,7 +26,7 @@ exports.up = (pgm) => {
       type: 'INTEGER',
       notNull: true,
     },
-    albumId: {
+    album_id: {
       type: 'varchar(50)',
       notNull: false,
       references: '"albums"',
@@ -41,7 +41,7 @@ exports.up = (pgm) => {
       notNull: true,
     },
   });
-  pgm.createIndex('songs', 'albumId');
+  pgm.createIndex('songs', 'album_id');
 };
 
 exports.down = (pgm) => {
