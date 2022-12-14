@@ -22,13 +22,13 @@ class AlbumsHandler {
 
   async getAlbumByIdHandler(request, h) {
     const { id } = request.params;
-    const albums = await this._service.getAlbumById(id);
+    const album = await this._service.getAlbumById(id);
 
     const response = h.response({
       status: 'success',
       message: 'Get Album berhasil',
       data: {
-        albums,
+        album,
       },
     });
     response.code(200);

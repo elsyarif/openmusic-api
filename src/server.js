@@ -21,7 +21,7 @@ const init = async () => {
   await server.register([
     {
       plugin: albums,
-      option: {
+      options: {
         service: new AlbumsService(),
         validator: AlbumsValidator,
       },
@@ -34,24 +34,29 @@ const init = async () => {
     if (response instanceof Error) {
       if (response instanceof ClientError) {
         const newResponse = h.response({
-          stats: 'fail',
+          status: 'fail',
           message: response.message,
         });
+
         newResponse.code(response.statusCode);
         return newResponse;
       }
+
+      if (!response.isServer) {
+        return h.continue;
+      }
+
+      const newResponse = h.response({
+        status: 'error',
+        message: 'terjadi kegagalan pada server kami',
+        stack: response.stack,
+      });
+
+      newResponse.code(500);
+      return newResponse;
     }
 
-    if (!response.isServer) {
-      return h.continue;
-    }
-
-    const newResponse = h.response({
-      status: 'error',
-      message: 'terjadi kegagalan pada server kami',
-    });
-    newResponse.code(500);
-    return newResponse;
+    return h.continue;
   });
 
   await server.start();
