@@ -4,10 +4,10 @@
 
 ## Kriteria OpenMusic API versi 2
 TODO:  
-- [ ] Membuat Migrasi Users
-    - [ ] Membuat UserService
-    - [ ] Membuat Validator User
-    - [ ] Membuat API User Plugin
+- [x] Membuat Migrasi Users
+    - [x] Membuat UserService
+    - [x] Membuat Validator User
+    - [x] Membuat API User Plugin
 - [ ] Membuat Migrasi Authentictions
     - [ ] Membuat AuthenticationService
     - [ ] Membuat Validator Authentictions
