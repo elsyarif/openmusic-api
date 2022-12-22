@@ -9,7 +9,7 @@ TODO:
     - [x] Membuat UserService
     - [x] Membuat Validator User
     - [x] Membuat API User Plugin
-- [ ] Membuat Authentictions
+- [x] Membuat Authentictions
     - [x] Membuat Migrasi Authentictions
     - [x] Membuat AuthenticationService
         - [x] Memasukkan refresh token (addRefreshToken).
@@ -22,14 +22,21 @@ TODO:
         - [x] Memverifikasi refresh token (verifyRefreshToken).
     - [x] Membuat API Authentictions Plugin
 - [ ] Membuat Playlilsts
-    - [ ] Membuat Migrasi Playlilsts
+    - [x] Membuat Migrasi Playlilsts
+    - [ ] Untuk mengakses membutuhkan access token
     - [ ] Membuat PlaylistService
-    - [ ] Membuat Validator Playlists
+        - [x] Masukan playlist baru (addPlaylist)
+        - [x] Mendapatkan semua playlist (getPlaylist)
+        - [x] Menghapus playlist berdasarkan ID Playlist (deletePlaylistById)
+    - [x] Membuat Validator Playlists
     - [ ] Membuat API Playlilsts Plugin
 - [ ] Membuat Playlist Songs
-    - [ ] Membuat Migrasi Playlist Songs
-    - [ ] Membuat PlaylistSongService
-    - [ ] Membuat Validator Playlist Song
+    - [x] Membuat Migrasi Playlist Songs
+    - [x] Membuat PlaylistSongService
+        - [x] Menambahkan lagu ke playlist (addPlaylistSong)
+        - [x] Melihat daftar lagi di dalam playlist (getPlaylistSong)
+        - [x] Menghapus lagu di dalam playlist (deletePlaylistSong)
+    - [x] Membuat Validator Playlist Song
     - [ ] Membuat API Playlist Song Plugin
 - [ ] Membuat Collaborations
     - [ ] Membuat Migrasi Collaborations
