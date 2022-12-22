@@ -4,32 +4,45 @@
 
 ## Kriteria OpenMusic API versi 2
 TODO:  
-- [x] Membuat Migrasi Users
+- [x] Membuat Users
+    - [x] Membuat Migrasi Users
     - [x] Membuat UserService
     - [x] Membuat Validator User
     - [x] Membuat API User Plugin
-- [ ] Membuat Migrasi Authentictions
-    - [ ] Membuat AuthenticationService
-    - [ ] Membuat Validator Authentictions
-    - [ ] Membuat API Authentictions Plugin
-- [ ] Membuat Migrasi Playlilsts
+- [ ] Membuat Authentictions
+    - [x] Membuat Migrasi Authentictions
+    - [x] Membuat AuthenticationService
+        - [x] Memasukkan refresh token (addRefreshToken).
+        - [x] Memverifikasi atau memastikan refresh token ada di database (verifyRefreshToken).
+        - [x] Menghapus refresh token (deleteRefreshToken).
+    - [x] Membuat Validator Authentictions
+    - [x] Membuat Token Menager
+        - [x] Membuat atau men-generate access token (generateAccessToken).
+        - [x] Membuat atau men-generate refresh token (generateRefreshToken).
+        - [x] Memverifikasi refresh token (verifyRefreshToken).
+    - [x] Membuat API Authentictions Plugin
+- [ ] Membuat Playlilsts
+    - [ ] Membuat Migrasi Playlilsts
     - [ ] Membuat PlaylistService
     - [ ] Membuat Validator Playlists
     - [ ] Membuat API Playlilsts Plugin
-- [ ] Membuat Migrasi Playlist Songs
+- [ ] Membuat Playlist Songs
+    - [ ] Membuat Migrasi Playlist Songs
     - [ ] Membuat PlaylistSongService
     - [ ] Membuat Validator Playlist Song
     - [ ] Membuat API Playlist Song Plugin
-- [ ] Membuat Migrasi Collaborations
+- [ ] Membuat Collaborations
+    - [ ] Membuat Migrasi Collaborations
     - [ ] Membuat CollaborationService
     - [ ] Membuat Validator Collaborations
     - [ ] Membuat API Collaborations Plugin
-- [ ] Membuat Migrasi Playlist Song Activities
+- [ ] Membuat Playlist Song Activities
+    - [ ] Membuat Migrasi Playlist Song Activities
     - [ ] Membuat PlaylistSongActivitieService
     - [ ] Membuat Validator Playlist Song Activities
     - [ ] Membuat API Playlist Song Activities Plugin
 - [ ] Penanganan Error Handling
-    - [ ] Authentictions Error 401 (Unauthorized)
+    - [x] Authentictions Error 401 (Unauthorized)
     - [ ] Authorization Error 403 (Forbidden)
 
 - [ ] Registrasi dan Autentikasi Pengguna

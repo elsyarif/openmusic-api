@@ -2,6 +2,8 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
 const InvariantError = require('../../exceptions/InvariantError');
+const NotFoundError = require('../../exceptions/NotFoundError');
+const AuthenticationError = require('../../exceptions/AuthenticationError');
 
 class UsersService {
   constructor() {
@@ -38,7 +40,7 @@ class UsersService {
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new InvariantError('User tidak ditemukan');
+      throw new NotFoundError('User tidak ditemukan');
     }
 
     return result.rows[0];
@@ -61,21 +63,25 @@ class UsersService {
 
   async verifyUserCredential(username, password) {
     const query = {
-      text: 'SELECT id, username, password FROM users WHERE username = $1',
+      text: 'SELECT id, password FROM users WHERE username = $1',
       values: [username],
     };
 
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new InvariantError('Username/password salah');
+      throw new AuthenticationError('Kredensial yang Anda berikan salah');
     }
 
-    const match = await bcrypt.compare(password, result.rows[0].password);
+    const { id, password: hashPassword } = result.rows[0];
+
+    const match = await bcrypt.compare(password, hashPassword);
 
     if (!match) {
-      throw new InvariantError('Username/password salah');
+      throw new AuthenticationError('Kredensial yang Anda berikan salah');
     }
+
+    return id;
   }
 }
 
