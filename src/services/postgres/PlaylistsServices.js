@@ -29,7 +29,9 @@ class PlaylistsServices {
 
   async getPlaylist(owner) {
     const query = {
-      text: 'SELECT id, name, owner FROM playlists WHERE owner = $1',
+      text: `SELECT A.id, A.name, B.username FROM playlists A
+        LEFT JOIN users B ON B.id = A.owner
+        WHERE A.owner = $1`,
       values: [owner],
     };
 
@@ -51,7 +53,7 @@ class PlaylistsServices {
     }
   }
 
-  async verifyPlaylisOwner(id, owner) {
+  async verifyPlaylistOwner(id, owner) {
     const query = {
       text: 'SELECT * FROM playlists WHERE id = $1',
       values: [id],

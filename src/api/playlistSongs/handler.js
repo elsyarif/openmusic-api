@@ -1,4 +1,4 @@
-class PlaylistSongsHanlder {
+class PlaylistSongsHandler {
   constructor(playlistService, songService, playlistSongService, validator) {
     this._playlistService = playlistService;
     this._songService = songService;
@@ -7,16 +7,18 @@ class PlaylistSongsHanlder {
   }
 
   async postPlaylistSongsHandler(request, h) {
-    this._validator.validatePlaylistPayload(request.payload);
+    this._validator.validatePlaylistSongPayload(request.payload);
     const { songId } = request.payload;
+    const { id: credentialId } = request.auth.credentials;
     const { id } = request.params;
 
     await this._songService.getSongById(songId);
-    await this._playlistSongService.addPlaylistSong({ id, songId });
+    await this._playlistService.verifyPlaylistOwner(id, credentialId);
+    await this._playlistSongService.addPlaylistSong(id, { songId });
 
-    const response = h.respons({
+    const response = h.response({
       status: 'success',
-      message: 'Playlis song berhasil ditambahkan',
+      message: 'Playlist song berhasil ditambahkan',
     });
     response.code(201);
     return response;
@@ -24,10 +26,12 @@ class PlaylistSongsHanlder {
 
   async getPlaylistSongsHandler(request, h) {
     const { id } = request.params;
+    const { id: credentialId } = request.auth.credentials;
 
+    await this._playlistService.verifyPlaylistOwner(id, credentialId);
     const playlist = await this._playlistSongService.getPlaylistSong(id);
 
-    const response = h.respons({
+    const response = h.response({
       status: 'success',
       data: {
         playlist,
@@ -38,10 +42,12 @@ class PlaylistSongsHanlder {
   }
 
   async deletePlaylistSongsHandler(request, h) {
-    this._validator.validatePlaylistPayload(request.payload);
+    this._validator.validatePlaylistSongPayload(request.payload);
     const { id } = request.params;
     const { songId } = request.payload;
+    const { id: credentialId } = request.auth.credentials;
 
+    await this._playlistService.verifyPlaylistOwner(id, credentialId);
     await this._playlistSongService.deletePlaylistSong(id, songId);
 
     const response = h.response({
@@ -53,4 +59,4 @@ class PlaylistSongsHanlder {
   }
 }
 
-module.exports = PlaylistSongsHanlder;
+module.exports = PlaylistSongsHandler;

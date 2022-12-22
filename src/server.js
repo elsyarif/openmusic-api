@@ -32,8 +32,8 @@ const PlaylistValidator = require('./validator/playlists');
 
 // playlist songs
 const playlistSongs = require('./api/playlistSongs');
-const PlaylistSongsService = require('./services/postgres/PlaylistsServices');
-const PlaylistSongsValidator = require('./validator/playlists');
+const PlaylistSongsService = require('./services/postgres/PlaylistSongsServices');
+const PlaylistSongsValidator = require('./validator/playlistSongs');
 
 const init = async () => {
   const authenticationsService = new AuthenticationsService();

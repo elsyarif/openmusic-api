@@ -8,7 +8,7 @@ class PlaylistSongsService {
     this._pool = new Pool();
   }
 
-  async addPlaylistSong({ playlistId, songId }) {
+  async addPlaylistSong(playlistId, { songId }) {
     const id = `playlist-song-${nanoid(16)}`;
 
     const query = {
@@ -19,7 +19,7 @@ class PlaylistSongsService {
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new InvariantError('Playlis song gagal ditambahkan');
+      throw new InvariantError('Playlist song gagal ditambahkan');
     }
   }
 
@@ -41,7 +41,7 @@ class PlaylistSongsService {
     const playlist = result.rows[0];
 
     const querySong = {
-      text: `SELECT * FROM playlists A 
+      text: `SELECT C.id, C.title, C.performer FROM playlists A 
         JOIN playlist_songs B ON  B.playlist_id = A.id
         JOIN songs C ON C.id = B.song_id
         WHERE A.id = $1`,

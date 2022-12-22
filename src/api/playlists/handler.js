@@ -7,9 +7,9 @@ class PlaylistHandler {
   async postPlaylistHandler(request, h) {
     this._validator.validatePlaylistPayload(request.payload);
     const { name } = request.payload;
-    const { credentialId } = request.auth.credentials;
+    const { id: credentialId } = request.auth.credentials;
 
-    const playlistId = await this._service.assPlaylist({ name, owner: credentialId });
+    const playlistId = await this._service.addPlaylist({ name, owner: credentialId });
 
     const response = h.response({
       status: 'success',
@@ -22,7 +22,7 @@ class PlaylistHandler {
   }
 
   async getPlaylistHandler(request, h) {
-    const { credentialId } = request.auth.credentials;
+    const { id: credentialId } = request.auth.credentials;
     const playlists = await this._service.getPlaylist(credentialId);
 
     const response = h.response({
@@ -37,9 +37,9 @@ class PlaylistHandler {
 
   async deletePlaylistHandler(request, h) {
     const { id } = request.params;
-    const { credentialId } = request.auth.credentials;
+    const { id: credentialId } = request.auth.credentials;
 
-    await this._service.verifyPlaylisOwner(id, credentialId);
+    await this._service.verifyPlaylistOwner(id, credentialId);
     await this._service.deletePlaylistById(id);
 
     const response = h.response({

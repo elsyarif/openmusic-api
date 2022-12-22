@@ -23,21 +23,21 @@ TODO:
     - [x] Membuat API Authentictions Plugin
 - [ ] Membuat Playlilsts
     - [x] Membuat Migrasi Playlilsts
-    - [ ] Untuk mengakses membutuhkan access token
-    - [ ] Membuat PlaylistService
+    - [x] Untuk mengakses membutuhkan access token
+    - [x] Membuat PlaylistService
         - [x] Masukan playlist baru (addPlaylist)
         - [x] Mendapatkan semua playlist (getPlaylist)
         - [x] Menghapus playlist berdasarkan ID Playlist (deletePlaylistById)
     - [x] Membuat Validator Playlists
-    - [ ] Membuat API Playlilsts Plugin
-- [ ] Membuat Playlist Songs
+    - [x] Membuat API Playlilsts Plugin
+- [x] Membuat Playlist Songs
     - [x] Membuat Migrasi Playlist Songs
     - [x] Membuat PlaylistSongService
         - [x] Menambahkan lagu ke playlist (addPlaylistSong)
         - [x] Melihat daftar lagi di dalam playlist (getPlaylistSong)
         - [x] Menghapus lagu di dalam playlist (deletePlaylistSong)
     - [x] Membuat Validator Playlist Song
-    - [ ] Membuat API Playlist Song Plugin
+    - [x] Membuat API Playlist Song Plugin
 - [ ] Membuat Collaborations
     - [ ] Membuat Migrasi Collaborations
     - [ ] Membuat CollaborationService
