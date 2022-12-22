@@ -38,19 +38,20 @@ TODO:
         - [x] Menghapus lagu di dalam playlist (deletePlaylistSong)
     - [x] Membuat Validator Playlist Song
     - [x] Membuat API Playlist Song Plugin
-- [ ] Membuat Collaborations
-    - [ ] Membuat Migrasi Collaborations
-    - [ ] Membuat CollaborationService
-    - [ ] Membuat Validator Collaborations
-    - [ ] Membuat API Collaborations Plugin
-- [ ] Membuat Playlist Song Activities
-    - [ ] Membuat Migrasi Playlist Song Activities
-    - [ ] Membuat PlaylistSongActivitieService
-    - [ ] Membuat Validator Playlist Song Activities
-    - [ ] Membuat API Playlist Song Activities Plugin
-- [ ] Penanganan Error Handling
+- [x] Membuat Collaborations
+    - [x] Membuat Migrasi Collaborations
+    - [x] Membuat CollaborationService
+    - [x] Membuat Validator Collaborations
+    - [x] Membuat API Collaborations Plugin
+- [x] Membuat Playlist Song Activities
+    - [x] Membuat Migrasi Playlist Song Activities
+    - [x] Membuat PlaylistSongActivitieService
+    - [x] Membuat Validator Playlist Song Activities
+    - [x] Membuat API Playlist Song Activities Plugin
+    - [ ] menambahkan acitivities ke playlist song
+- [x] Penanganan Error Handling
     - [x] Authentictions Error 401 (Unauthorized)
-    - [ ] Authorization Error 403 (Forbidden)
+    - [x] Authorization Error 403 (Forbidden)
 
 - [ ] Registrasi dan Autentikasi Pengguna
     - [ ] /users
