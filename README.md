@@ -21,7 +21,7 @@ TODO:
         - [x] Membuat atau men-generate refresh token (generateRefreshToken).
         - [x] Memverifikasi refresh token (verifyRefreshToken).
     - [x] Membuat API Authentictions Plugin
-- [ ] Membuat Playlilsts
+- [x] Membuat Playlilsts
     - [x] Membuat Migrasi Playlilsts
     - [x] Untuk mengakses membutuhkan access token
     - [x] Membuat PlaylistService
