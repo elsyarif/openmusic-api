@@ -30,7 +30,6 @@ class UserHandler {
 
     const response = h.response({
       status: 'success',
-      message: 'User berhasil ditambahkan',
       data: {
         user,
       },
