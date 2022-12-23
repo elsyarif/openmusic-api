@@ -24,7 +24,8 @@ class PlaylistSongsActivitiesService {
       text: `SELECT B.username, C.title, A.action, A.time FROM playlist_song_activities A
         LEFT JOIN users B ON B.id = A.user_id
         LEFT JOIN songs C ON C.id = A.song_id
-        WHERE A.playlist_id = $1`,
+        WHERE A.playlist_id = $1
+        ORDER BY A.action`,
       values: [playlistId],
     };
 

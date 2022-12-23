@@ -48,13 +48,13 @@ TODO:
     - [x] Membuat PlaylistSongActivitieService
     - [x] Membuat Validator Playlist Song Activities
     - [x] Membuat API Playlist Song Activities Plugin
-    - [ ] menambahkan acitivities ke playlist song
+    - [x] menambahkan acitivities ke playlist song
 - [x] Penanganan Error Handling
     - [x] Authentictions Error 401 (Unauthorized)
     - [x] Authorization Error 403 (Forbidden)
 
-- [ ] Registrasi dan Autentikasi Pengguna
-    - [ ] /users
+- [x] Registrasi dan Autentikasi Pengguna
+    - [x] /users
         - Method: POST
         - Body Request:
             ```json
@@ -73,7 +73,7 @@ TODO:
                 }
             }
             ```
-    - [ ] /authentictions
+    - [x] /authentictions
         - Method: POST
         - Body Request:
             ```json
@@ -92,7 +92,7 @@ TODO:
                 }
             }
             ```
-    - [ ] /authentictions
+    - [x] /authentictions
         - Method: PUT
         - Body Request:
             ```json
@@ -109,7 +109,7 @@ TODO:
                 }
             }
             ```
-    - [ ] /authentictions
+    - [x] /authentictions
         - Method: DELETE
         - Body Request:
             ```json
