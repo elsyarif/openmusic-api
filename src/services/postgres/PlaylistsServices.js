@@ -15,8 +15,8 @@ class PlaylistsServices {
     const createAt = new Date().toISOString();
 
     const query = {
-      text: 'INSERT INTO playlists VALUES($1, $2, $3, $4, $5) RETURNING id',
-      values: [id, name, owner, createAt, createAt],
+      text: 'INSERT INTO playlists VALUES($1, $2, $3, $4, $4) RETURNING id',
+      values: [id, name, owner, createAt],
     };
 
     const result = await this._pool.query(query);
