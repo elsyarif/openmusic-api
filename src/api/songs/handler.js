@@ -72,7 +72,7 @@ class SongHandler {
 
     const response = h.response({
       status: 'success',
-      message: 'song berhasil diperbaharui',
+      message: 'Song berhasil diperbaharui',
     });
 
     response.code(200);
@@ -86,7 +86,7 @@ class SongHandler {
 
     const response = h.response({
       status: 'success',
-      message: 'song berhasil dihapus',
+      message: 'Song berhasil dihapus',
     });
 
     response.code(200);
