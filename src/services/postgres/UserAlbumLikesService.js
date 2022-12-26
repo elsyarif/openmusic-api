@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
-const { use } = require('bcrypt/promises');
 
 class UserAlbumLikesService {
-  constructor() {
+  constructor(cacheService) {
     this._pool = new Pool();
+    this._cacheService = cacheService;
   }
 
   async likeAlbum(userId, albumId) {
@@ -22,6 +22,8 @@ class UserAlbumLikesService {
     if (!result.rowCount) {
       throw new InvariantError('User gagal like album');
     }
+
+    await this._cacheService.remove(`album-like:${albumId}`);
   }
 
   async unlikeAlbum(userId, albumId) {
@@ -35,16 +37,30 @@ class UserAlbumLikesService {
     if (!result.rowCount) {
       throw new NotFoundError('User gagal unlike album');
     }
+
+    await this._cacheService.remove(`album-like:${albumId}`);
   }
 
   async getAlbumLike(albumId) {
-    const query = {
-      text: 'SELECT * FROM user_album_likes WHERE album_id = $1',
-      values: [albumId],
-    };
+    try {
+      const result = await this._cacheService.get(`album-like:${albumId}`);
+      return {
+        likes: JSON.parse(result),
+        from: 'cache',
+      };
+    } catch {
+      const query = {
+        text: 'SELECT * FROM user_album_likes WHERE album_id = $1',
+        values: [albumId],
+      };
 
-    const result = await this._pool.query(query);
-    return result.rowCount;
+      const result = await this._pool.query(query);
+
+      await this._cacheService.set(`album-like:${albumId}`, JSON.stringify(result.rowCount), 1800);
+      return {
+        likes: result.rowCount,
+      };
+    }
   }
 
   async verifyAlbumLike(userId, albumId) {
