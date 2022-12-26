@@ -36,7 +36,7 @@ class AlbumsService {
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new NotFoundError('Song Id tidak ditemukan');
+      throw new NotFoundError('Album Id tidak ditemukan');
     }
 
     const album = result.rows[0];
