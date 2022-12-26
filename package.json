@@ -18,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^20.2.2",
+    "@hapi/inert": "^7.0.0",
     "@hapi/jwt": "^3.0.0",
     "amqplib": "^0.10.3",
     "aws-sdk": "^2.1282.0",

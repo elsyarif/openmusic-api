@@ -2,6 +2,7 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
+const { AlbumModel } = require('../../utils/model');
 
 class AlbumsService {
   constructor() {
@@ -28,7 +29,7 @@ class AlbumsService {
 
   async getAlbumById(id) {
     const query = {
-      text: 'SELECT id, name, year FROM albums WHERE id = $1',
+      text: 'SELECT id, name, year, cover FROM albums WHERE id = $1',
       values: [id],
     };
 
@@ -51,7 +52,7 @@ class AlbumsService {
       album.songs = songs.rows;
     }
 
-    return album;
+    return AlbumModel(album);
   }
 
   async editAlbumById(id, { name, year }) {
@@ -79,6 +80,19 @@ class AlbumsService {
 
     if (!result.rowCount) {
       throw new NotFoundError('Album gagal dihapus, Id tidak ditemukan');
+    }
+  }
+
+  async updateAlbumCover(id, coverUrl) {
+    const query = {
+      text: 'UPDATE albums SET cover_url = $1 WHERE id = $2 RETURNING id',
+      values: [coverUrl, id],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Album gagal diperbaharui, album id tidak ditemukan');
     }
   }
 }
