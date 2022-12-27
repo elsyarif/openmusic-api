@@ -1,7 +1,9 @@
 require('dotenv').config();
+const path = require('path');
 
 const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
+const Inert = require('@hapi/inert');
 const ClientError = require('./exceptions/ClientError');
 
 // albums
@@ -44,6 +46,21 @@ const collaborations = require('./api/collaborations');
 const CollaborationsService = require('./services/postgres/CollaborationService');
 const CollaborationsValidator = require('./validator/collaborations');
 
+// exports
+const _exports = require('./api/exports');
+const ProducerService = require('./services/rabbitmq/ProducerService');
+const ExportsValidator = require('./validator/exports');
+
+// uploads
+const uploads = require('./api/uploads');
+const StorageService = require('./services/storage/StorageService');
+const UploadsValidator = require('./validator/uploads');
+
+// user album like
+const userAlbumLikes = require('./api/userAlbumLikes');
+const UserAlbumLikesService = require('./services/postgres/UserAlbumLikesService');
+const CacheService = require('./services/redis/CacheService');
+
 const init = async () => {
   const collaborationsService = new CollaborationsService();
 
@@ -54,6 +71,11 @@ const init = async () => {
   const playlistService = new PlaylistService(collaborationsService);
   const playlistSongService = new PlaylistSongsService();
   const playlistSongsActivitiesService = new PlaylistSongsActivitiesService();
+  const storageService = new StorageService(
+    path.resolve(__dirname, 'api/uploads/file/cover'),
+  );
+  const cacheService = new CacheService();
+  const userAlbumLikesService = new UserAlbumLikesService(cacheService);
 
   const server = Hapi.server({
     host: process.env.HOST,
@@ -65,9 +87,14 @@ const init = async () => {
     },
   });
 
-  await server.register({
-    plugin: Jwt,
-  });
+  await server.register([
+    {
+      plugin: Jwt,
+    },
+    {
+      plugin: Inert,
+    },
+  ]);
 
   server.auth.strategy('jwt_openmusic', 'jwt', {
     keys: process.env.ACCESS_TOKEN_KEY,
@@ -147,6 +174,29 @@ const init = async () => {
         playlistService,
         usersService,
         validator: CollaborationsValidator,
+      },
+    },
+    {
+      plugin: _exports,
+      options: {
+        producerService: ProducerService,
+        playlistService,
+        validator: ExportsValidator,
+      },
+    },
+    {
+      plugin: uploads,
+      options: {
+        storageService,
+        albumService,
+        validator: UploadsValidator,
+      },
+    },
+    {
+      plugin: userAlbumLikes,
+      options: {
+        userAlbumLikesService,
+        albumService,
       },
     },
   ]);
