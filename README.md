@@ -1,19 +1,16 @@
 # OpenMusic API Version 3
 
-[Database Diagram](https://dbdiagram.io/d/63a2bfa999cb1f3b55a2b29e)
-
-## Kriteria OpenMusic API version 3
 TODO:
-- [ ] Ekspor Lagu Pada Playlist
-  - [ ] Menggunakan message broker dengan menggunakan RabbitMQ.
+- [x] Ekspor Lagu Pada Playlist
+  - [x] Menggunakan message broker dengan menggunakan RabbitMQ.
     - Nilai host server RabbitMQ wajib menggunakan environment variable RABBITMQ_SERVER
-  - [ ] Hanya pemilik Playlist yang boleh mengekspor lagu.
-  - [ ] Wajib mengirimkan program consumer.
-  - [ ] Hasil ekspor berupa data json.
-  - [ ] Dikirimkan melalui email menggunakan nodemailer.
+  - [x] Hanya pemilik Playlist yang boleh mengekspor lagu.
+  - [x] Wajib mengirimkan program consumer.
+  - [x] Hasil ekspor berupa data json.
+  - [x] Dikirimkan melalui email menggunakan nodemailer.
     - Kredensial alamat dan password email pengirim wajib menggunakan environment variable MAIL_ADDRESS dan MAIL_PASSWORD.
     - Serta, nilai host dan port dari server SMTP juga wajib menggunakan environment variable MAIL_HOST dan MAIL_PORT.
-  - [ ] Response yang harus dikembalikan:
+  - [x] Response yang harus dikembalikan:
     - Status Code: 201
     - Response Body:
       ```json
@@ -48,7 +45,7 @@ TODO:
       }
     }
     ```
-- [ ] Mengunggah Sampul Album.
+- [x] Mengunggah Sampul Album.
     - Body Request (Form data).
       ```json
       {
@@ -68,5 +65,5 @@ TODO:
         "message": "Sampul berhasil diunggah"
       }
       ```
-- [ ] Menyukai Album
-- [ ] Menerapkan Server-Side Cache  
+- [x] Menyukai Album
+- [x] Menerapkan Server-Side Cache  
